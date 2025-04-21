@@ -1,0 +1,36 @@
+{
+  "name": "rfuehricht/formhandler-ajax",
+  "type": "typo3-cms-extension",
+  "description": "Add AJAX capability to Formhandler. File upload, validation, submit.",
+  "version": "13.0.0",
+  "license": [
+    "GPL-3.0-or-later"
+  ],
+  "authors": [
+    {
+      "name": "Reinhard Führicht",
+      "email": "r.fuehricht@gmail.com"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://composer.typo3.org/"
+    }
+  ],
+  "require": {
+    "php": "^8.1",
+    "typo3/cms-backend": "~13.4",
+    "rfuehricht/typo3-formhandler": "^13"
+  },
+  "autoload": {
+    "psr-4": {
+      "Rfuehricht\\FormhandlerAjax\\": "Classes/"
+    }
+  },
+  "extra": {
+    "typo3/cms": {
+      "extension-key": "formhandler_ajax"
+    }
+  }
+}
