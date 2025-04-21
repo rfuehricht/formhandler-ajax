@@ -10,7 +10,6 @@ use TYPO3\CMS\Core\Attribute\AsEventListener;
 use TYPO3\CMS\Core\Page\AssetCollector;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 #[AsEventListener(
     identifier: 'formhandler-ajax/before-view',
@@ -41,11 +40,12 @@ final readonly class BeforeViewEventListener
         if (isset($settings['ajaxSubmit']) && boolval($settings['ajaxSubmit']) === true) {
             $inlineSettings['ajaxSubmit'] = true;
         }
-        /** @var ContentObjectRenderer $contentObjectRenderer */
-        $contentObjectRenderer = $event->getRequest()->getAttribute('currentContentObject');
-        $inlineSettings[$contentObjectRenderer->data['uid']] = $inlineSettings;
+
+        $finalSettings = [
+            $this->globals->getRandomId() => $inlineSettings
+        ];
         /** @var PageRenderer $pageRenderer */
         $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
-        $pageRenderer->addInlineSettingArray('formhandler', $inlineSettings);
+        $pageRenderer->addInlineSettingArray('formhandler', $finalSettings);
     }
 }

@@ -21,7 +21,7 @@
   "require": {
     "php": "^8.1",
     "typo3/cms-backend": "~13.4",
-    "rfuehricht/typo3-formhandler": "^13"
+    "rfuehricht/formhandler": "^13"
   },
   "autoload": {
     "psr-4": {

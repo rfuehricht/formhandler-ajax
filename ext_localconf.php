@@ -1,5 +1,7 @@
 <?php
 
+use Rfuehricht\FormhandlerAjax\Ajax\RemoveFile;
+
 defined('TYPO3') or die();
 
 

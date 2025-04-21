@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
               body: JSON.stringify({
                 token: button.closest('form').querySelector('input[name$="[randomId]"]').value,
                 field: button.dataset.field,
-                i: button.dataset.index
+                hash: button.dataset.filehash
               })
             })
               .then(function (response) {

@@ -39,7 +39,7 @@ class RemoveFile
     {
         $params = json_decode($request->getBody()->__toString(), true);
         $fieldName = $params['field'] ?? null;
-        $index = $params['i'] ?? null;
+        $hash = $params['hash'] ?? null;
         $content = ['status' => 'ok'];
 
         /** @var Globals $globals */
@@ -50,23 +50,20 @@ class RemoveFile
             $sessionFiles = $globals->getSession()->get('files');
 
             if (is_array($sessionFiles) && isset($sessionFiles[$fieldName])) {
-                if ($index !== null) {
-                    unlink(
-                        $sessionFiles[$fieldName][$index]['uploaded_path'] .
-                        $sessionFiles[$fieldName][$index]['uploaded_name']
-                    );
-                    unset($sessionFiles[$fieldName][$index]);
-                } else {
-                    foreach ($sessionFiles[$fieldName] as $index => $file) {
-                        unlink(
-                            $file['uploaded_path'] .
-                            $file['uploaded_name']
-                        );
+                foreach ($sessionFiles[$fieldName] as $index => $file) {
+                    $filePath = $file['uploaded_path'] .
+                        $file['uploaded_name'];
+
+                    if (($hash !== null && $hash === $file['fileHash']) || $hash === null) {
+
+
+                        if (file_exists($filePath)) {
+                            unlink($filePath);
+                        }
                         unset($sessionFiles[$fieldName][$index]);
                     }
                 }
             }
-
             $globals->getSession()->set('files', $sessionFiles);
         }
 

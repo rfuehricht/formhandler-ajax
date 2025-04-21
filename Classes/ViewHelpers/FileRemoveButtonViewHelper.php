@@ -18,7 +18,7 @@ final class FileRemoveButtonViewHelper extends AbstractViewHelper
         return '<button
                     data-formhandler-action="remove"
                     data-field="' . $fileInfo['field'] . '"
-                    data-index="' . $fileInfo['index'] . '">' . $textContent . '
+                    data-filehash="' . $fileInfo['fileHash'] . '">' . $textContent . '
                  </button>';
 
     }
