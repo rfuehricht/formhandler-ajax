@@ -29,6 +29,10 @@ final readonly class BeforeViewEventListener
         $validations = $this->globals->getValidations();
         GeneralUtility::makeInstance(AssetCollector::class)
             ->addJavaScript(
+                'formhandler-ajax-htmx',
+                'EXT:formhandler_ajax/Resources/Public/JavaScript/htmx.min.js'
+            )
+            ->addJavaScript(
                 'formhandler',
                 'EXT:formhandler_ajax/Resources/Public/JavaScript/formhandler.js'
             );

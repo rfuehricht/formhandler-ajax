@@ -18,7 +18,7 @@ namespace Rfuehricht\FormhandlerAjax\Ajax;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Rfuehricht\Formhandler\Utility\Globals;
-use TYPO3\CMS\Core\Http\JsonResponse;
+use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -37,10 +37,10 @@ class RemoveFile
      */
     public function process(ServerRequestInterface $request): ResponseInterface
     {
-        $params = json_decode($request->getBody()->__toString(), true);
+        $params = $request->getQueryParams();
         $fieldName = $params['field'] ?? null;
         $hash = $params['hash'] ?? null;
-        $content = ['status' => 'ok'];
+        $content = '';
 
         /** @var Globals $globals */
         $globals = GeneralUtility::makeInstance(Globals::class);
@@ -67,7 +67,7 @@ class RemoveFile
             $globals->getSession()->set('files', $sessionFiles);
         }
 
-        return new JsonResponse($content);
+        return new HtmlResponse($content);
     }
 
 
