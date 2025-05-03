@@ -39,7 +39,7 @@ class RemoveFile
     {
         $params = $request->getQueryParams();
         $fieldName = $params['field'] ?? null;
-        $hash = $params['hash'] ?? null;
+        $hash = $params['filehash'] ?? null;
         $content = '';
 
         /** @var Globals $globals */
