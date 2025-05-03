@@ -29,7 +29,10 @@ final class FileRemoveButtonViewHelper extends AbstractViewHelper
                     data-formhandler-action="file-remove"
                     data-hx-get="' . $url . '"
                     data-hx-target="this"
-                    data-hx-swap="outerHTML">' . $textContent . '
+                    data-hx-swap="outerHTML"
+                    ' . ($this->arguments['removeElement'] ? 'data-remove-selector="' . $this->arguments['removeElement'] . '"' : '') . '
+
+                    >' . $textContent . '
 
                  </button>';
 
@@ -47,6 +50,13 @@ final class FileRemoveButtonViewHelper extends AbstractViewHelper
             'value',
             'string',
             'Text content of the button'
+        );
+        $this->registerArgument(
+            'removeElement',
+            'string',
+            'Selector of the closest element of the button to remove after file is removed.',
+            false,
+            ''
         );
     }
 }
